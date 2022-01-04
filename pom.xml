@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <groupId>dev.ivanov</groupId>
+    <artifactId>OCP-Oracle-Certified-Professional-Java-SE-17-1Z0-829-Open-Study-Guide</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <name>OCP-Oracle-Certified-Professional-Java-SE-17-1Z0-829-Open-Study-Guide</name>
+    <description>Lightweight Java Visualizer</description>
+
+    <properties>
+        <revision>1.03</revision>
+        <asciidoctor.maven.plugin.version>2.1.0</asciidoctor.maven.plugin.version>
+        <asciidoctorj-diagram.version>2.2.1</asciidoctorj-diagram.version>
+    </properties>
+
+    <modelVersion>4.0.0</modelVersion>
+    <build>
+        <plugins>    
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>2.2.1</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.asciidoctor</groupId>
+                        <artifactId>asciidoctorj-diagram</artifactId>
+                        <version>${asciidoctorj-diagram.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <requires>
+                        <require>asciidoctor-diagram</require>
+                    </requires>
+                    <logHandler>
+                        <outputToConsole>true</outputToConsole>
+                        <failIf>
+                            <severity>WARN</severity>
+                        </failIf>
+                    </logHandler>
+                    <backend>html5</backend>
+                    <sourceHighlighter>coderay</sourceHighlighter>
+                    <attributes>
+                        <project-version>1.03</project-version>
+                    </attributes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>asciidoc-to-html</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDocumentName>1Z0-829StudyGuide.adoc</sourceDocumentName>
+                            <outputFile>index.html</outputFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
