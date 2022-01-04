@@ -1,0 +1,11 @@
+= Oracle Certified Professional Java SE 17 1Z0-829 Open Study Guide
+
+== About this book
+This book's primary purpose is to provide a straightforward and convenient way to prepare for the new Oracle exam - 1z0-829.
+This book assumes that you already have experience with java because the information in some chapters is very concentrated.
+
+=== What is OCP?
+
+This is professional JAVA https://education.oracle.com/java-se-17-developer/pexam_1Z0-829[certification] from Oracle. You can use it as proof of your knowledge to your new employer.
+There is a lot of controversy about whether it is necessary or not.
+I believe that certification is necessary. It gives you the possibility to structure your knowledge of java core.
