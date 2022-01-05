@@ -1,11 +1,51 @@
 = Oracle Certified Professional Java SE 17 1Z0-829 Open Study Guide
 
 == About this book
+
 This book's primary purpose is to provide a straightforward and convenient way to prepare for the new Oracle exam - 1z0-829.
 This book assumes that you already have experience with java because the information in some chapters is very concentrated.
 
 === What is OCP?
 
-This is professional JAVA https://education.oracle.com/java-se-17-developer/pexam_1Z0-829[certification] from Oracle. You can use it as proof of your knowledge to your new employer.
+This is professional JAVA https://education.oracle.com/java-se-17-developer/pexam_1Z0-829[certification] from Oracle.
+You can use it as proof of your knowledge to your new employer.
 There is a lot of controversy about whether it is necessary or not.
-I believe that certification is necessary. It gives you the possibility to structure your knowledge of java core.
+I believe that certification is necessary.
+It gives you the possibility to structure your knowledge of java core.
+
+=== What is Java 17?
+
+Java 17 is LTS release.
+It stands for Long Time Support version.
+So, support for this version will continue until the end of 2026.
+The following Java 21 LTS release will appear in September 2023. Until it, you will have up-to-date certification.
+
+=== How to use this book
+
+Book has 11 significant chapters. Each chapter corresponds to a specific topic in the Oracle exam.
+Each topic describes a problem in a maximum compressed format.
+The topics are loosely connected to study them in any order.
+
+=== Handing date, time, text, numeric and boolean values
+
+==== Math API
+
+==== Text Blocks
+
+==== Date-Time API
+
+=== Controlling Program Flow
+
+==== Switch statements and expressions
+
+=== Utilizing Java Object-Oriented Approach
+
+==== Create classes and records
+
+==== Implement inheritance, including abstract and sealed classes
+
+==== Instanceof operator and pattern matching
+
+=== Access databases using JDBC
+
+==== Control transactions using JDBC API
