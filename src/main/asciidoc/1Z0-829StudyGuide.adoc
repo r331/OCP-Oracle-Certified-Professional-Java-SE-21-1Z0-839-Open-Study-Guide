@@ -37,6 +37,77 @@ The topics are loosely connected to study them in any order.
 
 ==== Text Blocks
 
+*Problem*: it is too hard to write long strings with SQL query or HTML code.
+
+*Solution*: give users a convenient way to write text blocks without unnecessary string concatenation.
+You can simply paste snippets of code into strings.
+
+So we can use such strings:
+
+[source,java]
+----
+var source = """
+    var message = "Hello, World";
+    System.out.println(message + '!');
+    """;
+----
+
+We don't need to use escape characters for quotes!
+But, be careful on the exam, such code wouldn't compile:
+
+[source,java]
+----
+// ERROR
+var name = """text""";
+
+// ERROR
+var name = """first
+second
+""";
+----
+
+The position of the last three quotation marks will determine the last character in the sequence if they are right after the characters:
+
+[source,java]
+----
+var name = """
+first
+second
+""";
+----
+
+Will be - #"first\nsecond\n"#
+
+And
+
+[source,java]
+----
+var name = """
+first
+second""";
+----
+
+Will be - #"first\nsecond"#
+
+If we want to adjust the indentation:
+
+[source,java]
+----
+var names = """
+first
+second""".indent(1);
+System.out.println("---");
+System.out.println(names);
+----
+
+[source,bash]
+----
+Output:
+---
+ first
+ second
+----
+
 ==== Date-Time API
 
 === Controlling Program Flow
