@@ -43,6 +43,71 @@ The topics are loosely connected to study them in any order.
 
 ==== Switch statements and expressions
 
+===== Switch expressions
+
+*Problem*: switch blocks effectively replace the expression if-else, but they are very verbose.
+It's very likely to forget the BREAK word at the end of an expression.
+And it couldn't return values.
+
+*Solution*: switch expression with lambda look syntax.
+
+Let's see an example.
+We want to write a function that returns String with animal sound:
+
+[source,java]
+----
+public enum Animal {
+    DOG,
+    CAT,
+    LION,
+    BIRD;
+
+    public String getSound(Animal animal) {
+        return switch (animal) {
+            case CAT, LION -> "Meow";
+            case DOG -> "Bark-Bark";
+            case BIRD -> "Chick-Chick";
+        };
+    }
+}
+----
+
+You should agree.
+The expression looks much more compact than the standard switch.
+We could add default case for unpredictable inputs:
+
+[source,java]
+----
+return switch (animal) {
+    case CAT -> "Meow";
+    case DOG -> "Bark-Bark";
+    case BIRD -> "Chick-Chick";
+    default -> "Unknown animal";
+};
+----
+
+In this case, our switch expression doesn't cover all possible enum values, so we add a default case, like in the old-fashioned switch.
+If we want to add more instructions in our lambda, we need to add curvy bracers and a new reserved word yield:
+
+[source,java]
+----
+return switch (animal) {
+    case CAT -> "Meow";
+    case DOG -> "Bark-Bark";
+    case BIRD -> {
+        System.out.println("It's a Bird!");
+        yield "Chick-Chick";
+    }
+    default -> "Unknown animal";
+};
+----
+
+Why don't we use return?
+Because return will throw us out of the expression.
+
+As a usual switch, a new switch consumes such objects:
+*char, byte, short, int, Character, Byte, Short, Integer, String, or an enum.*
+
 === Utilizing Java Object-Oriented Approach
 
 ==== Create classes and records
@@ -55,6 +120,7 @@ The topics are loosely connected to study them in any order.
 
 For example, you have abstract class Animal, and your use it as a base class to build other classes like Dog and Cat.
 But if someone creates a new class Car and decides to inherit it from Animal, you couldn't prevent it.
+
 *Solution*: Sealed classes in Java 17.
 
 Sealed classes enforce rules on inheritance:
