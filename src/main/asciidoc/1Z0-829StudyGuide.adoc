@@ -1,4 +1,8 @@
 = Oracle Certified Professional Java SE 17 1Z0-829 Open Study Guide
+:imagesdir: images
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
 
 == About this book
 
@@ -22,7 +26,8 @@ The following Java 21 LTS release will appear in September 2023. Until it, you w
 
 === How to use this book
 
-Book has 11 significant chapters. Each chapter corresponds to a specific topic in the Oracle exam.
+Book has 11 significant chapters.
+Each chapter corresponds to a specific topic in the Oracle exam.
 Each topic describes a problem in a maximum compressed format.
 The topics are loosely connected to study them in any order.
 
@@ -43,6 +48,90 @@ The topics are loosely connected to study them in any order.
 ==== Create classes and records
 
 ==== Implement inheritance, including abstract and sealed classes
+
+===== Sealed classes
+
+*Problem*: Inheritance in Java is not limited.
+
+For example, you have abstract class Animal, and your use it as a base class to build other classes like Dog and Cat.
+But if someone creates a new class Car and decides to inherit it from Animal, you couldn't prevent it.
+*Solution*: Sealed classes in Java 17.
+
+Sealed classes enforce rules on inheritance:
+[source,java]
+
+----
+
+public abstract sealed class Animal permits Dog, Cat {}
+----
+
+Now, only two classes can extend our base class.
+We couldn't write such code:
+[source,java]
+
+----
+
+public class Lion extends Animal {}
+----
+
+We need to add Lion class explicitly to Animal class signature, or we could get an error:
+
+[source,bash]
+----
+java: class is not allowed to extend sealed class: dev.ivanov.book.Animal (as it is not listed in its permits clause)
+----
+
+Now, let's look at Cat and Dog classes.
+We should mandatorily create them to compile our code.
+
+Because we want to restrict inheritance, we need to foresee a situation where someone wants to inherit from our Cat and Dog classes to get functionality from the parent class.
+And Java 17 gives us this possibility.
+When we create Cat or Dog, we need to make these classes final - it prevents any inheritance from this class or mark them also sealed:
+
+[source,java]
+----
+
+public final class Dog extends Animal {}
+----
+
+[source,java]
+----
+
+public sealed class Cat extends Animal permits Lion {}
+----
+
+Only the new Lion class can extend Cat.
+In this way, we have protected the logic within our Cat class from erroneous inheritance.
+
+In the case where such protection is not needed, and we want to give users unlimited inheritance options, it is worth adding the keyword non-sealed:
+
+[source,java]
+----
+
+public non-sealed class Lion extends Cat {}
+----
+
+Now, class Lion may have any heirs.
+
+It is especially worth noting that you can reduce the signature of a base class by simply putting all its descendants into the same file:
+[source,java]
+
+----
+
+public abstract sealed class Animal {}
+final class Bird extends Animal {}
+----
+
+Also, interfaces could be marked sealed:
+
+[source,java]
+----
+
+public sealed interface Animal permits Bird, Cat, Dog {}
+final class Bird implements Animal {}
+----
+
+But in this situation, we need explicitly declare all permits.
 
 ==== Instanceof operator and pattern matching
 
