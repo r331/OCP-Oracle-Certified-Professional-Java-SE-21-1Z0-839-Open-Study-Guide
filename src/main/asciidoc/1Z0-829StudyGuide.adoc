@@ -206,6 +206,9 @@ We have equals() and hashcode() methods implemented.
 Also, we have the overloaded method toString() - it prints all variables in the record.
 We have default constructor Point(int x, int y).
 And we have getters - x() and y().
+Because records were made for DTOs at first, they were made final and immutable.
+But you can add new constructors, static and non-static methods.
+
 Code
 
 [source,java]
@@ -239,7 +242,7 @@ Code
     }
 ----
 
-Will output following:
+Will output the following:
 
 [source,bash]
 ----
@@ -254,9 +257,6 @@ true
 true
 9.055385138137417
 ----
-
-Because records were made for DTOs at first, they were made final and immutable.
-But you can add new constructors, static and non-static methods.
 
 ==== Implement inheritance, including abstract and sealed classes
 
@@ -346,6 +346,9 @@ final class Bird implements Animal {}
 But in this situation, we need explicitly declare all permits.
 
 ==== Instanceof operator and pattern matching
+
+===== Pattern matching
+
 
 === Access databases using JDBC
 
