@@ -8,7 +8,7 @@
     <packaging>pom</packaging>
 
     <name>OCP-Oracle-Certified-Professional-Java-SE-17-1Z0-829-Open-Study-Guide</name>
-    <description>Lightweight Java Visualizer</description>
+    <description>Open source book</description>
 
     <properties>
         <revision>1.03</revision>

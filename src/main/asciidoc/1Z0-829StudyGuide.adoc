@@ -183,6 +183,81 @@ As a usual switch, a new switch consumes such objects:
 
 ==== Create classes and records
 
+===== Records
+
+*Problem*: DTO in java has a lot of boilerplate.
+
+*Solution*: add special data classes to avoid boilerplate code like constructors, getters, etc.
+
+Many developers like Lombok library because it makes such DTOs very compact.
+But this library has some problems.
+Users need more robust solutions on the language level.
+
+Let's see how it looks with records:
+
+[source,java]
+----
+public record Point(int x, int y) { }
+----
+
+This short expression gives us a lot of exciting functionality.
+
+We have equals() and hashcode() methods implemented.
+Also, we have the overloaded method toString() - it prints all variables in the record.
+We have default constructor Point(int x, int y).
+And we have getters - x() and y().
+Code
+
+[source,java]
+----
+    public record Point(int x, int y) {
+        Point() {
+            this(0, 0);
+        }
+
+        boolean isYPositive() {
+            return y >= 0;
+        }
+
+        static double dist(Point first, Point second) {
+            return sqrt(pow(first.x() - second.x(), 2) + pow(first.y() - second.y(), 2));
+        }
+    }
+
+    public static void main(String[] args) {
+        var myPoint = new Point(1, 9);
+        System.out.println(myPoint);
+        System.out.println(myPoint.x());
+        System.out.println(myPoint.y());
+        System.out.println(myPoint.isYPositive());
+        System.out.println("Equals\n");
+        var myPoint2 = new Point(1, 9);
+        System.out.println(myPoint == myPoint2);
+        System.out.println(myPoint.equals(myPoint2));
+        System.out.println(myPoint.equals(myPoint2));
+        System.out.println(dist(myPoint, new Point()));
+    }
+----
+
+Will output following:
+
+[source,bash]
+----
+Point[x=1, y=9]
+1
+9
+true
+Equals
+
+false
+true
+true
+9.055385138137417
+----
+
+Because records were made for DTOs at first, they were made final and immutable.
+But you can add new constructors, static and non-static methods.
+
 ==== Implement inheritance, including abstract and sealed classes
 
 ===== Sealed classes
