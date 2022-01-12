@@ -17,7 +17,7 @@ There is a lot of controversy about whether it is necessary or not.
 I believe that certification is necessary.
 It gives you the possibility to structure your knowledge of java core.
 
-=== What is Java 17?
+=== Why Java 17?
 
 Java 17 is LTS release.
 It stands for Long Time Support version.
