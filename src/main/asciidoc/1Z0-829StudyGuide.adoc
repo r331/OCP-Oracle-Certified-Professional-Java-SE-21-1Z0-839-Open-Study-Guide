@@ -4,7 +4,7 @@
 :toc: left
 :toclevels: 4
 
-== About this book
+=== About this book
 
 This book's primary purpose is to provide a straightforward and convenient way to prepare for the new Oracle exam - 1z0-829.
 This book assumes that you already have experience with java because the information in some chapters is very concentrated.
@@ -348,6 +348,38 @@ But in this situation, we need explicitly declare all permits.
 ==== Instanceof operator and pattern matching
 
 ===== Pattern matching
+
+Problem: using instanceof operator has excess casting
+Solution: add a more convenient way without an explicit cast
+
+Before java 16, we used such constructions:
+
+[source,java]
+----
+if (o instanceof Cat) {
+   System.out.println(((Cat) o).getName());
+}
+----
+
+But it looks ugly because inside the 'if' statement, we already know the type of 'o'.
+So, let's rewrite it:
+
+[source,java]
+----
+if (o instanceof Cat cat) {
+   System.out.println((cat.getName());
+}
+----
+
+We also allowed to instantly use our cat variable inside if statement after 'instanceof' operator:
+
+[source,java]
+----
+if (o instanceof Cat cat && cat.getAge() > 5) {
+   System.out.println((cat.getName());
+}
+----
+
 
 
 === Access databases using JDBC
