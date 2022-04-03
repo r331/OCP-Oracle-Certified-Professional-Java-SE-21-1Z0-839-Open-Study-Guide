@@ -33,6 +33,26 @@ The topics are loosely connected to study them in any order.
 
 == Content
 
+=== Java basic concepts
+
+==== OOP
+
+Let's clarify the main computer concepts, to speak one language.
+
+*Problem*: it is too hard to write programs in structured languages where an object's behavior is separated from object logic.
+
+*Solution*: object-oriented programming.
+The main idea is very simple. Everything in our universe we could describe as an object with condition and behavior.
+Each condition variable is a field, each function, that represents object behavior is a method.
+
+In structural languages, you have data inside structures and functions that can manipulate these data. But this functions
+doesn't have any links for data.
+In the oop approach you can immediately see what methods could work with your data because they are placed inside the object
+description - class.
+
+Class is a template for objects. It contains a description of fields and methods.
+Their amount depends on your level of abstraction.
+
 === Handing date, time, text, numeric and boolean values
 
 ==== Math API
@@ -381,8 +401,6 @@ if (o instanceof Cat cat && cat.getAge() > 5) {
    System.out.println((cat.getName());
 }
 ----
-
-
 
 === Access databases using JDBC
 
