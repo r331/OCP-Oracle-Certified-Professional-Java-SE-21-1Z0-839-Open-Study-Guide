@@ -51,7 +51,43 @@ In the oop approach you can immediately see what methods could work with your da
 description - class.
 
 Class is a template for objects. It contains a description of fields and methods.
-Their amount depends on your level of abstraction.
+Amount of fields and methods depends on your level of abstraction.
+
+==== Packages and modules
+
+*Problem*: we need a simple mechanism to store and reuse our and third party classes
+
+*Solution*: Java has packages.
+
+So, we could store our classes in separate directories. It gives us a possibility to avoid name clashes when we want to use
+classes with the same names.
+We can group classes by logic. Let's look at an example:
+
+package dev.ivanov.math - in this package we could store classes with math functions
+
+In the file system it just directories with such view: /dev/ivanov/math/
+
+package dev.ivanov.math.calculator - in this package we could store classes with our calculator logic
+
+In the file system it just directories with such view: /dev/ivanov/math/calculator
+
+It's very important to know that there is not any connection between packages, even if they have similar package names.
+
+*Problem*: We need to import two versions of the same package, to avoid version conflicts.
+Or we have a library which contains some packages which we want to make completely unavailable for our customers.
+
+*Solution*: Java has modules.
+
+Unlike packages, modules are a group of packages. So we can unit some packages into modules and use them in our dependencies.
+
+Each module has its own descriptor, that contains such information:
+
+Name - the name of the module
+Dependencies - list of other modules on which the module depends
+Public packages - list of all the packages that could be accessed from outside the module
+Services Offered - list of services that can be consumed by other modules
+Services Consumed - allows the current module to be a service consumer
+Reflection Permissions - explicitly allows other classes to use reflection to access closed package members
 
 === Handing date, time, text, numeric and boolean values
 

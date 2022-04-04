@@ -7,8 +7,7 @@ target/
 !**/src/test/**/build/
 gen/
 .jpb
-
-
+*.html
 
 ### STS ###
 .apt_generated
