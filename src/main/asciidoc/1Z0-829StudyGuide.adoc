@@ -83,13 +83,91 @@ Unlike packages, modules are a group of packages. So we can unit some packages i
 Each module has its own descriptor, that contains such information:
 
 Name - the name of the module
+
 Dependencies - list of other modules on which the module depends
+
 Public packages - list of all the packages that could be accessed from outside the module
+
 Services Offered - list of services that can be consumed by other modules
+
 Services Consumed - allows the current module to be a service consumer
+
 Reflection Permissions - explicitly allows other classes to use reflection to access closed package members
 
 === Handing date, time, text, numeric and boolean values
+
+==== Primitive types
+
+*Problem*: Objects in Java are very heavy
+
+*Solution*: add primitive types
+
+Everything is an object!
+You have heard this phrase more than once while learning java.
+
+But 25 years ago, computers had problems. There were not enough memory and computing resources to run large programs.
+For this reason, the OOP approach won, and the functional approach lost. Creating mutable objects saved memory. But it was not enough.
+Numbers occur in any program in large quantities. And it was costly to make them as objects with their references. That's why there are eight types of primitive objects in the java.
+
+|===
+|Keyword |Type |Minimum value |Maximum value |Default value
+
+|boolean
+|8-bit value (true or false)
+|-
+|-
+|false
+
+|byte
+|8-bit value
+|-128
+|127
+|0
+
+|short
+|16-bit value
+|-32,768
+|32,767
+|0
+
+|int
+|32-bit value
+|-2,147,483,648
+|2,147,483,647
+|0
+
+|long
+|64-bit value
+|-2^63
+|2^63 - 1
+|0L
+
+|float
+|32-bit value
+|-
+|-
+|0.0f
+
+|double
+|64-bit value
+|-
+|-
+|0.0
+
+|char
+|16-bit value
+|0
+|65,535
+|0
+|===
+
+The compiler always uses the int and double types if the type is not explicitly specified.
+This code will not work:
+
+[source,java]
+----
+byte i = 10;
+----
 
 ==== Math API
 
