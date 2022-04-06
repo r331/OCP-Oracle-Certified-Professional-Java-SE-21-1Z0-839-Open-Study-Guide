@@ -96,6 +96,63 @@ Reflection Permissions - explicitly allows other classes to use reflection to ac
 
 === Handing date, time, text, numeric and boolean values
 
+==== Var
+
+*Problem*: Variable declarations can be too verbose.
+
+*Solution*: add var keyword to declare variables.
+
+Just look at the example:
+
+[source,java]
+----
+class A{}
+class SuperLongClassName extends A{}
+void print(){
+    SuperLongClassName superLongClassName = getSuperLongClassName();
+    System.out.print(superLongClassName);
+}
+SuperLongClassName getSuperLongClassName(){
+    return new SuperLongClassName();
+}
+----
+
+At first, the var keyword can make the expression more compact:
+
+[source,java]
+----
+var superLongClassName = getSuperLongClassName();
+System.out.print(superLongClassName);
+----
+
+And add flexibility to refactoring. Now we can return another expression from the getSuperLongClassName()
+method and the code inside the print() method won't need to be changed
+[source,java]
+----
+void print(){
+    var superLongClassName = getSuperLongClassName();
+    System.out.print(superLongClassName);
+}
+A getSuperLongClassName(){
+    return new SuperLongClassName();
+}
+----
+
+Note! Such a declaration can only be applied within a method and must be initialized immediately:
+[source,java]
+----
+class SuperLongClassName{
+    var classVariable; // doesn't compile
+    void print(var parameter){ // doesn't compile
+            var localVariable; // doesn't compile
+            var superLongClassName = getSuperLongClassName(); // ok
+            System.out.print(superLongClassName);
+        }
+}
+----
+
+At compile time the var turns into the type we need.
+
 ==== Primitive types
 
 *Problem*: Objects in Java are very heavy
@@ -168,6 +225,8 @@ This code will not work:
 ----
 byte i = 10;
 ----
+
+==== Date and time
 
 ==== Math API
 
