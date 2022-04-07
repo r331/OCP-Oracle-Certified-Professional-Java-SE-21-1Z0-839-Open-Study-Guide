@@ -226,6 +226,63 @@ This code will not work:
 byte i = 10;
 ----
 
+==== Operator precedence
+
+For the exam, it is essential to know the operator precedence.
+Just look as closely as possible at this table:
+
+.Operator precedence
+|===
+|Operator |Symbols and examples
+
+|Post-unary operators
+|expression++, expression--
+
+|Pre-unary operators
+|++expression, --expression
+
+|Other unary operators
+|-, + ,!, ~
+
+|Type casting
+|(type)expression
+
+|Multiplication & division
+|*, /
+
+|Division modulo
+|%
+
+|Addition & subtraction
+|+, -
+
+|Shift operations
+|<<, >>, >>>
+
+|Relational operators
+|<, <=, >, >=
+
+|Equal & not-equal operators
+|==, !=
+
+|Equal & not-equal operators
+|==, !=
+
+|Bit operators(from high to low)
+|& ->  ^ ->  \|
+
+|Conditional operators(from high to low)
+|&& -> \|\|
+
+|Ternary operator
+|boolean expression ? expressionA : expressionB
+
+|Assignment operators
+|=, +=, -=, *=, /=, %=, <<\=, >>=, >>>=, &=, ^=
+|===
+
+TIP: The order of the operators is important. Always add parentheses to avoid confusion.
+
 ==== Date and time
 
 ==== Math API
