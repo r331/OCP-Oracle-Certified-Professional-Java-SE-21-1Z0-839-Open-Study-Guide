@@ -226,6 +226,11 @@ This code will not work:
 byte i = 10;
 ----
 
+*int* is the basic type in java for integer calculations.
+Therefore, if you perform operations on different smaller types(byte, short, and char), the compiler will try to convert them to the *int* type.
+
+If you want to perform operations on different larger types(long, float, and double), you need to explicitly specify the type.
+
 ==== Operator precedence
 
 For the exam, it is essential to know the operator precedence.
@@ -282,8 +287,6 @@ Just look as closely as possible at this table:
 |===
 
 TIP: The order of the operators is important. Always add parentheses to avoid confusion.
-
-==== Date and time
 
 ==== Math API
 
@@ -361,6 +364,96 @@ Output:
 ----
 
 ==== Date-Time API
+*Problem*: Every program needs to know the current date and time.
+
+*Solution*: java new Date-Time API
+
+In the exam, there are always questions on it. The new API that has appeared in java since version 8 makes it very easy to work with time. Here are the basic things you should know about it.
+We have 4 types of dates:
+
+.Local Dates
+|===
+|Class name |Features
+
+|LocalDate
+|Date without time and time zone
+
+|LocalTime
+|Time without date and time zone
+
+|LocalDateTime
+|Date and time without time zone
+
+|ZonedDateTime
+|Date and time with time zone
+|===
+
+Every class has a convenient static method to get an object with the current date and time: *now()*
+We could create an objects with current date and time:
+
+[source,java]
+----
+//Most popular methods
+static LocalDate of(int year, int month, int day)
+static LocalTime of(int hour, int minute, int second)
+LocalDateTime of(int year, Month month, int dayOfMonth, int hour, int minute)
+LocalDateTime of(LocalDate date, LocalTime time)
+ZonedDateTime of(LocalDateTime dateTime, ZoneId zone)
+//etc
+----
+
+*Problem*: It is super hard to add days to a date in previous date-time API.
+
+*Solution*: In my opinion, the most convenient methods are methods of manipulating dates and times.
+
+Just check the following methods:
+
+[source,java]
+var date = LocalDateTime.now().plusDays(1).plusWeeks(2).plusMonths(3).plusYears(4).minusHours(5).minusMinutes(6);
+
+*Problem*: It is super hard to work with periods and time intervals.
+
+*Solution*: Period and Duration classes.
+
+[source,java]
+----
+Period.ofYears(1); // every year
+Period.ofMonths(2); // every two months
+Period.ofWeeks(3); // every three weeks
+Period.ofDays(4); // every four days
+Period.of(1, 2, 3); // every 1 year, 2 months, 3 weeks
+
+var date = LocalDate.now().plus(Period.of(1, 2, 3));
+----
+
+[source,java]
+----
+Duration.ofDays(1); // 1 day
+Duration.ofHours(1); // every hour
+Duration.ofMinutes(2); // every two minutes
+Duration.ofSeconds(3); // every three seconds
+Duration.of(4, ChronoUnit.SECONDS); // every 4 seconds
+Duration.ofMillis(10); // every 10 milliseconds
+Duration.ofNanos(10); // every 10 nanoseconds
+var dateTime = LocalDateTime.now().plus(Duration.of(1, ChronoUnit.SECONDS));
+----
+
+*Problem*: sometimes we need to work with time points, for example, when we want to know the time when the next day starts.
+
+*Solution*: Instant class
+
+.Quote from the official documentation:
+----
+An instantaneous point on the time-line.
+This class models a single instantaneous point on the time-line. This might be used to record event time-stamps in the application.
+----
+
+[source,java]
+----
+var time1 = Instant.now();
+var time2 = ZonedDateTime.now().toInstant();
+var duration = Duration.between(time1, time2);
+----
 
 === Controlling Program Flow
 
