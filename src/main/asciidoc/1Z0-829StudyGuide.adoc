@@ -292,6 +292,39 @@ TIP: The order of the operators is important. Always add parentheses to avoid co
 
 ==== Math API
 
+Math API is very useful for calculations.
+For exam you need to know the following:
+Java has min() and max() methods for the int, float, long and double types.
+Method round():
+
+[source,java]
+----
+public static long round(double num)
+public static int round(float num)
+System.out.println(Math.round(3.5)) // 4
+System.out.println(Math.round(3.45)) // 3
+----
+
+For double values we have two additional methods:
+
+[source,java]
+----
+public static double ceil(double num)
+public static double floor(double num)
+Math.ceil(3.14) // 4
+Math.floor(3.14) // 3
+----
+
+*Math.random()* method return a random double value between 0 and 1.
+But I urge you to use the next methods:
+
+[source,java]
+----
+new Random().ints();
+new Random().doubles();
+----
+this is beautiful method for generating random numbers.
+
 ==== Manipulate text, including text blocks, using String and StringBuilder classes
 
 ==== Text Blocks
