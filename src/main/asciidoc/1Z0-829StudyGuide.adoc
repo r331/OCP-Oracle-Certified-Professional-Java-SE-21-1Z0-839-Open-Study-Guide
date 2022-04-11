@@ -327,6 +327,13 @@ this is beautiful method for generating random numbers.
 
 ==== Manipulate text, including text blocks, using String and StringBuilder classes
 
+==== String and StringBuilder classes
+
+String and StringBuilder classes are very useful for manipulating text.
+String is immutable, while StringBuilder is mutable.
+String is a sequence of characters.
+
+
 ==== Text Blocks
 
 *Problem*: it is too hard to write long strings with SQL query or HTML code.
