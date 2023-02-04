@@ -832,3 +832,5 @@ if (o instanceof Cat cat && cat.getAge() > 5) {
 === Implementing Localization
 
 ==== Implement localization using locales, resource bundles, parse and format messages, dates, times, and numbers including currency and percentage values
+
+(c) Roman Ivanov
