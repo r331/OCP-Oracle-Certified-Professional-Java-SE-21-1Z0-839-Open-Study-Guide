@@ -569,8 +569,71 @@ return switch (animal) {
 Why don't we use return?
 Because return will throw us out of the expression.
 
-As a usual switch, a new switch consumes such objects:
-*char, byte, short, int, Character, Byte, Short, Integer, String, or an enum.*
+===== Pattern Matching for switch
+
+Pattern Matching for switch supports so-called patterns in case branches, which can be supplemented with conditions using the new 'when' keyword:
+
+[source,java]
+----
+Object obj = …
+return switch (obj) {
+case Integer i when i > 0 -> String.format("positive int %d", i);
+case Integer i -> String.format("int %d", i);
+case String s -> String.format("String %s", s);
+default -> obj.toString();
+};
+----
+It also allows for null matching, typically achieved through an explicit 'case null' branch. However, if there is no 'case null' branch, a switch statement with null passed to it will invariably throw a NullPointerException, even if a default branch exists. Notably, the 'null' and 'default' branches can be combined.
+[source,java]
+----
+Object obj = null;
+switch (obj) { // NullPointerException
+    case String s -> System.out.println("String: " + s);
+    default -> System.out.println("Other");
+}
+----
+
+[source,java]
+----
+String str = …
+switch (str) {
+    case "Foo", "Bar" -> System.out.println("Foo or Bar");
+    case null, default -> System.out.println("Null or other");
+}
+----
+
+The new pattern-matching feature in Witch has several limitations:
+
+1. All switches (except those correct before Java 21) must be exhaustive, meaning the branches should cover all possible cases. For example, this can be resolved by adding an 'Object o' or 'default' branch to the above example.
+[source,java]
+----
+Object obj = …
+switch (obj) { // 'switch' expression does not cover all possible input values
+    case String s -> System.out.println(s.length());
+    case Integer i -> System.out.println(i);
+};
+----
+
+2. The order of case branches is crucial; no branch should be dominated by another branch preceding it. For instance, since 'CharSequence' is a broader type than 'String', its branch should be placed after the 'String' branch.
+[source,java]
+----
+return switch (obj) {
+    case CharSequence cs -> // more wide
+        "sequence of length " + cs.length();
+    case String s -> // unreachable
+        "string of length " + s.length();
+    default -> "other";
+ };
+----
+
+3. Multiple patterns in the same branch are not supported.
+[source,java]
+----
+return switch (obj) {
+    case String s, Integer i -> "str/int";
+    default -> "other";
+ };
+----
 
 === Utilizing Java Object-Oriented Approach
 
