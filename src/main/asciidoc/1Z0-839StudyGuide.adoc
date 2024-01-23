@@ -604,7 +604,7 @@ switch (str) {
 
 The new pattern-matching feature in Witch has several limitations:
 
-1. All switches (except those correct before Java 21) must be exhaustive, meaning the branches should cover all possible cases. For example, this can be resolved by adding an 'Object o' or 'default' branch to the above example.
+All switches (except those correct before Java 21) must be exhaustive, meaning the branches should cover all possible cases. For example, this can be resolved by adding an 'Object o' or 'default' branch to the above example.
 [source,java]
 ----
 Object obj = …
@@ -614,7 +614,7 @@ switch (obj) { // 'switch' expression does not cover all possible input values
 };
 ----
 
-2. The order of case branches is crucial; no branch should be dominated by another branch preceding it. For instance, since 'CharSequence' is a broader type than 'String', its branch should be placed after the 'String' branch.
+The order of case branches is crucial; no branch should be dominated by another branch preceding it. For instance, since 'CharSequence' is a broader type than 'String', its branch should be placed after the 'String' branch.
 [source,java]
 ----
 return switch (obj) {
@@ -626,7 +626,7 @@ return switch (obj) {
  };
 ----
 
-3. Multiple patterns in the same branch are not supported.
+Multiple patterns in the same branch are not supported.
 [source,java]
 ----
 return switch (obj) {
