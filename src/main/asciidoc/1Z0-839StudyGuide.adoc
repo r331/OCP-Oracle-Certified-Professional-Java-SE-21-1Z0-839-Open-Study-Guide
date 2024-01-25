@@ -850,6 +850,56 @@ if (o instanceof Cat cat && cat.getAge() > 5) {
 }
 ----
 
+===== Record Patterns
+Record patterns enable concise record value deconstruction:
+[source,java]
+----
+record Point(int x, int y) {}
+
+static void print(Object obj) {
+    if (obj instanceof Point(int x, int y)) {
+       println(x + " " + y);
+    }
+}
+----
+Also achievable through a switch statement:
+[source,java]
+----
+static void print(Object obj) {
+    switch (obj) {
+        case Point(int x, int y) -> println(x + " " + y);
+        default -> System.out.println("Not a point");
+    }
+}
+----
+Their ability to nest enhances their flexibility:
+[source,java]
+----
+record Point(int x, int y) {}
+enum Color { RED, GREEN, BLUE }
+record ColoredPoint(Point p, Color c) {}
+record Rectangle(ColoredPoint first, ColoredPoint second) {}
+
+static void print(Rectangle r) {
+    if (r instanceof Rectangle(ColoredPoint(Point p, var c), var coloredPoint)) { // We are using var to omit info about class
+        println("Current color:" + c);
+    }
+}
+----
+They seamlessly integrate with type-based patterns:
+[source,java]
+----
+record Point(Object obj) {}
+
+static void test(Point point) {
+    switch (point) {
+        case Point(String s) -> println("string: " + s);
+        case Point(Object o) -> println("other: " + o);
+    }
+}
+----
+They also accommodate generic record type outputs:
+
 === Handling Exceptions
 
 ==== Handle exceptions using try/catch/finally, try-with-resources, and multi-catch blocks, including custom exceptions
