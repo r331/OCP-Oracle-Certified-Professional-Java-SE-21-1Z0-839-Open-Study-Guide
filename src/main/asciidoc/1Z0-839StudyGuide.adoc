@@ -922,6 +922,15 @@ They also accommodate generic record type outputs:
 
 === Managing concurrent code execution
 
+==== Virtual threads
+*Problem*: Creating a new thread is very expensive, forcing developers to employ various strategies—such as thread pools and reactive programming—to effectively utilize existing threads.
+
+*Solution*: Virtual threads.
+
+Virtual threads are designed to be lightweight, enabling the creation of vast quantities (up to millions) of instances. This feature simplifies the development of efficient programs by allowing a straightforward "one request - one thread" or "one task - one thread" model, eliminating the need for intricate asynchronous or reactive programming techniques. Additionally, transitioning existing code to virtual threads is intended to be straightforward. Since virtual threads are instances of the current *java.lang.Thread* class, they maintain high compatibility with traditional threads, including support for stack traces, the interrupt() method, ThreadLocal, and more.
+
+Virtual threads operate atop standard threads and are recognized only by the Java Virtual Machine (JVM), not by the operating system, which is why they are termed "virtual." The physical thread that a virtual thread runs on is referred to as the host thread. Unlike platform threads that depend on the operating system's scheduler, virtual threads are managed by the *ForkJoinPool* scheduler. When a virtual thread engages in a blocking operation, it detaches from its host thread. This detachment allows the host thread to take on another virtual thread and proceed with execution. This mechanism, coupled with the low cost of managing virtual threads, greatly enhances their scalability. However, there are currently two notable exceptions: synchronized blocks and Java Native Interface (JNI) operations. In these cases, a virtual thread cannot detach from its host thread due to its binding, which may affect scalability. To fully leverage virtual threads, it is advisable to minimize the use of synchronized blocks and JNI operations, especially those that are executed frequently or have lengthy durations.
+
 ==== Create worker threads using Runnable and Callable, manage the thread lifecycle, including automations provided by different Executor services and concurrent API
 
 ==== Develop thread-safe code, using different locking mechanisms and concurrent API
