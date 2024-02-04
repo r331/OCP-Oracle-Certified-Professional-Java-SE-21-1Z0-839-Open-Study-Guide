@@ -931,6 +931,16 @@ Virtual threads are designed to be lightweight, enabling the creation of vast qu
 
 Virtual threads operate atop standard threads and are recognized only by the Java Virtual Machine (JVM), not by the operating system, which is why they are termed "virtual." The physical thread that a virtual thread runs on is referred to as the host thread. Unlike platform threads that depend on the operating system's scheduler, virtual threads are managed by the *ForkJoinPool* scheduler. When a virtual thread engages in a blocking operation, it detaches from its host thread. This detachment allows the host thread to take on another virtual thread and proceed with execution. This mechanism, coupled with the low cost of managing virtual threads, greatly enhances their scalability. However, there are currently two notable exceptions: synchronized blocks and Java Native Interface (JNI) operations. In these cases, a virtual thread cannot detach from its host thread due to its binding, which may affect scalability. To fully leverage virtual threads, it is advisable to minimize the use of synchronized blocks and JNI operations, especially those that are executed frequently or have lengthy durations.
 
+While virtual threads present an appealing option, it's not always necessary to choose them over traditional threads. For instance, traditional threads are more appropriate for CPU-bound tasks. Additionally, if your requirement is for a non-daemon thread, you would need to opt for a traditional thread since virtual threads are inherently daemon threads.
+
+To facilitate the creation and management of virtual threads, the following API has been introduced:
+
+Thread.Builder: This serves as a thread builder. For instance, you can create a virtual thread by using the Thread.ofVirtual().name("name").unstarted(runnable) method.
+Thread.startVirtualThread(Runnable): This method allows for the creation and immediate start of a virtual thread.
+Thread.isVirtual(): This method is used to determine whether a thread is virtual.
+Executors.newVirtualThreadPerTaskExecutor(): This returns an executor that creates a new virtual thread for each task.
+Additionally, support for virtual threads has been incorporated into the JDK toolkit, enhancing tools such as the debugger, JVM TI, and Java Flight Recorder.
+
 ==== Create worker threads using Runnable and Callable, manage the thread lifecycle, including automations provided by different Executor services and concurrent API
 
 ==== Develop thread-safe code, using different locking mechanisms and concurrent API
