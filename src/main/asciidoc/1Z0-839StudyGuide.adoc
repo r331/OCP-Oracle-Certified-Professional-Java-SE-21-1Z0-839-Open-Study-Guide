@@ -941,6 +941,14 @@ Thread.isVirtual(): This method is used to determine whether a thread is virtual
 Executors.newVirtualThreadPerTaskExecutor(): This returns an executor that creates a new virtual thread for each task.
 Additionally, support for virtual threads has been incorporated into the JDK toolkit, enhancing tools such as the debugger, JVM TI, and Java Flight Recorder.
 
+Example:
+[source,java]
+----
+    try(var ex = Executors.newVirtualThreadPerTaskExecutor()){
+        ex.execute(() -> System.out.println("Running " + Thread.currentThread().isVirtual()));
+    }
+----
+
 ==== Create worker threads using Runnable and Callable, manage the thread lifecycle, including automations provided by different Executor services and concurrent API
 
 ==== Develop thread-safe code, using different locking mechanisms and concurrent API
