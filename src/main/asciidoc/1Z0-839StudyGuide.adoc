@@ -908,6 +908,26 @@ They also accommodate generic record type outputs:
 
 ==== Create Java arrays, List, Set, Map, and Deque collections, and add, remove, update, retrieve and sort their elements
 
+==== SequencedCollection, SequencedSet and SequencedMap.
+
+SequencedCollection is the successor of Collection and is a collection with a set order of elements.
+Such collections are LinkedHashSet and all implementations of List, SortedSet and Deque.
+These collections share the property of element sequence, but before Java 21 their common parent was Collection, which is too generic an interface and does not contain many methods specific to sequences (getFirst(), getLast(), addFirst(), addLast(), reversed(), etc.).
+
+[source,java]
+----
+interface SequencedCollection<E> extends Collection<E> {
+    E getFirst();
+    E getLast();
+    void addFirst(E);
+    void addLast(E);
+    E removeFirst();
+    E removeLast();
+    SequencedCollection<E> reversed();
+}
+----
+
+
 === Working with Streams and Lambda expressions
 
 ==== Use Java object and primitive Streams, including lambda expressions implementing functional interfaces, to supply, filter, map, consume, and sort data
