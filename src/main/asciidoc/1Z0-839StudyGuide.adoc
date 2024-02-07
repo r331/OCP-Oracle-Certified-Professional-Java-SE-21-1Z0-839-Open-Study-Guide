@@ -927,6 +927,24 @@ interface SequencedCollection<E> extends Collection<E> {
 }
 ----
 
+The reversed() method is noteworthy as it provides a view of the collection in the opposite order. This simplifies the process of reversing a collection significantly.
+
+[source,java]
+----
+var list = new LinkedList<>(…);
+
+// Before Java 21
+for (var it = list.descendingIterator(); it.hasNext();) {
+    var e = it.next();
+}
+
+// After Java 21
+for (var element : list.reversed()) {
+    …
+}
+
+----
+
 
 === Working with Streams and Lambda expressions
 
