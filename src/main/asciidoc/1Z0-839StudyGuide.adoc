@@ -944,8 +944,26 @@ for (var element : list.reversed()) {
 }
 
 ----
+The SequencedSet interface, designed for sequenced sets:
 
+[source,java]
+----
+interface SequencedSet<E> extends Set<E>, SequencedCollection<E> {
+SequencedSet<E> reversed();
+}
 
+----
+This interface is implemented by the successors of LinkedHashSet and SortedSet.
+
+Furthermore, the SequencedMap interface was also introduced in Java 21:
+
+[source,java]
+----
+interface SequencedSet<E> extends Set<E>, SequencedCollection<E> {
+SequencedSet<E> reversed();
+}
+
+----
 === Working with Streams and Lambda expressions
 
 ==== Use Java object and primitive Streams, including lambda expressions implementing functional interfaces, to supply, filter, map, consume, and sort data
