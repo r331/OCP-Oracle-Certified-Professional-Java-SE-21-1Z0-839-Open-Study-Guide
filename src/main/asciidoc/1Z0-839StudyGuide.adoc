@@ -955,7 +955,7 @@ SequencedSet<E> reversed();
 ----
 This interface is implemented by the successors of LinkedHashSet and SortedSet.
 
-Furthermore, the SequencedMap interface was also introduced in Java 21:
+The SequencedMap interface:
 
 [source,java]
 ----
