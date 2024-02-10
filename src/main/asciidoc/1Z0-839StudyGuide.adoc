@@ -964,6 +964,23 @@ SequencedSet<E> reversed();
 }
 
 ----
+
+SequencedMap interface:
+[source,java]
+----
+interface SequencedMap<K,V> extends Map<K,V> {
+    Entry<K, V> firstEntry();
+    Entry<K, V> lastEntry();
+    Entry<K, V> pollFirstEntry();
+    Entry<K, V> pollLastEntry();
+    V putFirst(K, V);
+    V putLast(K, V);
+    SequencedSet<K> sequencedKeySet();
+    SequencedCollection<V> sequencedValues();
+    SequencedSet<Entry<K,V>> sequencedEntrySet();
+    SequencedMap<K,V> reversed();
+}
+----
 === Working with Streams and Lambda expressions
 
 ==== Use Java object and primitive Streams, including lambda expressions implementing functional interfaces, to supply, filter, map, consume, and sort data
