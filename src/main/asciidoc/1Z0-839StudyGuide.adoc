@@ -45,10 +45,7 @@ Let's clarify the main computer concepts, to speak one language.
 The main idea is very simple. Everything in our universe we could describe as an object with condition and behavior.
 Each condition variable is a field, each function, that represents object behavior is a method.
 
-In structural languages, you have data inside structures and functions that can manipulate these data. But this functions
-doesn't have any links for data.
-In the oop approach you can immediately see what methods could work with your data because they are placed inside the object
-description - class.
+In structural programming languages, data is stored within structures, and there are separate functions designed to manipulate this data; however, these functions are not inherently linked to the data they operate on. Conversely, in object-oriented programming (OOP), methods that can operate on data are directly associated with the data itself, as they are encapsulated within the object's class definition, allowing for a more intuitive understanding of the interactions between data and methods.
 
 Class is a template for objects. It contains a description of fields and methods.
 Amount of fields and methods depends on your level of abstraction.
@@ -332,6 +329,26 @@ this is beautiful method for generating random numbers.
 String and StringBuilder classes are very useful for manipulating text.
 String is immutable, while StringBuilder is mutable.
 String is a sequence of characters.
+
+The String class is used to create and manipulate a sequence of characters. Strings are immutable, which means once a string object is created, its value cannot be changed. If you perform any modification on a string object, a new string object is created with the modified content. This immutability feature makes String safe to use in multithreaded environments but can lead to inefficiency in scenarios where frequent modifications are required because each modification results in the creation of a new string object.
+
+
+*Problem*: String class is too slow
+
+*Solution 1*: Add strings pool
+Java maintains a special area in the Java heap called the string pool. When a string is created and if the same value already exists in the pool, the new variable will reference the existing string instead of creating a new object. This gives:
+Memory Efficiency: Reduces the overall memory footprint of an application by avoiding duplicate string objects.
+Faster Equality Check: When comparing two string literals, if they are from the string pool, you can use *==* instead of *equals()* for comparison, which is faster because it compares object references instead of the content.
+
+Dynamically created strings (e.g., through user input or concatenation at runtime) do not automatically benefit from the pool unless explicitly interned using the *String.intern()* method, which can introduce its own performance overhead.
+
+*Solution 2*: Concatenate strings during compilation
+[source,java]
+----
+“String foo = 1 + "foo";
+String bar = "1foo";
+if(foo==bar)     // true
+----
 
 
 ==== Text Blocks
