@@ -342,6 +342,16 @@ Faster Equality Check: When comparing two string literals, if they are from the 
 
 Dynamically created strings (e.g., through user input or concatenation at runtime) do not automatically benefit from the pool unless explicitly interned using the *String.intern()* method, which can introduce its own performance overhead.
 
+[source,java]
+----
+str1.intern() == str2.intern() // is true only if str1.equals(str1) == true.
+----
+
+:tip-caption: 💡
+
+[TIP]
+Performance Trade-off: The process of interning strings itself can be costly, especially if done frequently. It's essential to profile the application to ensure that interning provides a net benefit.
+
 *Solution 2*: Concatenate strings during compilation
 [source,java]
 ----
@@ -349,6 +359,9 @@ Dynamically created strings (e.g., through user input or concatenation at runtim
 String bar = "1foo";
 if(foo==bar)     // true
 ----
+
+*Solution 3*: Use StringBuilder for dynamic string manipulation
+For scenarios involving dynamic string manipulations—such as appending, inserting, or deleting characters StringBuilder can yield significant performance improvements. StringBuilder is mutable and designed specifically for such use cases. StringBuilder can modify strings in place without creating new string objects for each modificatin and minimizes the memory overhead by not storing multiple string objects during manipulations.
 
 
 ==== Text Blocks
