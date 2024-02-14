@@ -363,7 +363,28 @@ if(foo==bar)     // true
 *Solution 3*: Use StringBuilder for dynamic string manipulation
 For scenarios involving dynamic string manipulations—such as appending, inserting, or deleting characters StringBuilder can yield significant performance improvements. StringBuilder is mutable and designed specifically for such use cases. StringBuilder can modify strings in place without creating new string objects for each modificatin and minimizes the memory overhead by not storing multiple string objects during manipulations.
 
+Strings have some useful methods, lets check them:
 
+1. We can compare strings
+[source,java]
+----
+String str1 = "abb";
+String str2 = "ad";
+
+int comparision = str1.compareTo(str2);
+----
+A value less than 0 if the first string is lexicographically less than the second string.
+A value of 0 if the first and second strings are equal.
+A value greater than 0 if the first string is lexicographically greater than the second string.
+
+2.
+Repeat our string count times
+[source,java]
+String repeat(int count)
+
+3.
+*replace(char oldChar, char newChar):* Replaces all occurrences of a specified character with another character.
+*replace(CharSequence target, CharSequence replacement):* Replaces each substring of the string that matches the target sequence with the specified replacement sequence.
 ==== Text Blocks
 
 *Problem*: it is too hard to write long strings with SQL query or HTML code.
