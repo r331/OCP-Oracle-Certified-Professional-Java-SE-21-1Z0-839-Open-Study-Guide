@@ -385,6 +385,26 @@ String repeat(int count)
 3.
 *replace(char oldChar, char newChar):* Replaces all occurrences of a specified character with another character.
 *replace(CharSequence target, CharSequence replacement):* Replaces each substring of the string that matches the target sequence with the specified replacement sequence.
+
+4.
+You can transform any string with the method *transform* and pass to it a Function.
+[source,java]
+----
+String message = "Hello, World!";
+String reversed = message.transform(s -> new StringBuilder(s).reverse().toString()); // !dlroW ,olleH
+----
+
+5.
+String format
+[source,java]
+----
+int age = 30;
+String name = "John";
+String message = String.format("%s is %d years old.", name, age);
+System.out.println(message); // Output: John is 30 years old.
+"%s is %d years old.".formatted(name, age); // Output: John is 30 years old.
+----
+
 ==== Text Blocks
 
 *Problem*: it is too hard to write long strings with SQL query or HTML code.
