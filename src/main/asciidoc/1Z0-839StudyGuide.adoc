@@ -404,6 +404,18 @@ String message = String.format("%s is %d years old.", name, age);
 System.out.println(message); // Output: John is 30 years old.
 "%s is %d years old.".formatted(name, age); // Output: John is 30 years old.
 ----
+StringBuilder has a couple of interesting methods:
+[source,java]
+----
+StringBuilder builder = new StringBuilder("chocolate bar");
+builder.delete(9, 13)          // Removes " bar", becomes "chocolate"
+.append(" cookies")     // Appends " cookies", becomes "chocolate cookies"
+.insert(9, " and")      // Inserts " and", becomes "chocolate and cookies"
+.reverse()              // Reverses, becomes "seikooc dna etalocohc"
+.deleteCharAt(0)        // Removes 's', becomes "eikooc dna etalocohc"
+.replace(0, 2, "c")     // Replaces "ei" with "c", becomes "ckooc dna etalocohc"
+.append('s');           // Appends 's', aims for "ckooc dna etalocohcs"
+----
 
 ==== Text Blocks
 
