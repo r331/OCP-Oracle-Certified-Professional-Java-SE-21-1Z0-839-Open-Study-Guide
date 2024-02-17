@@ -417,6 +417,21 @@ builder.delete(9, 13)          // Removes " bar", becomes "chocolate"
 .append('s');           // Appends 's', aims for "ckooc dna etalocohcs"
 ----
 
+*Managing StringBuilder Capacity*
+The methods listed below are unique to the StringBuilder class and allow for the manipulation of various aspects related to the capacity of a *StringBuilder:*
+
+[source,java]
+----
+int capacity() // This method returns the StringBuilder's current capacity, which is the total number of characters it can hold before it needs to allocate a larger character array.
+
+void ensureCapacity(int minCapacity) // This method guarantees that the StringBuilder has the capacity to hold at least a specified number of characters, minCapacity. If necessary, it increases the StringBuilder's capacity based on its current capacity.
+
+void trimToSize() //This method aims to minimize the memory footprint of the StringBuilder by reducing its storage size to fit the actual number of characters it contains. This action may alter the StringBuilder's capacity.
+
+void setLength(int newLength) //This method adjusts the length of the character sequence within the StringBuilder to match the newLength argument, which must not be negative. Depending on whether newLength is less or more than the current length, the method may truncate the sequence or extend it with null characters ('\u0000'). If newLength exceeds the current capacity, this method also increases the capacity of the StringBuilder.
+----
+
+
 ==== Text Blocks
 
 *Problem*: it is too hard to write long strings with SQL query or HTML code.
