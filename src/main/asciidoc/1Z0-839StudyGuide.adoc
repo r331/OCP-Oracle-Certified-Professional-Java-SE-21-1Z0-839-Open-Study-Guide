@@ -322,6 +322,20 @@ new Random().doubles();
 ----
 this is beautiful method for generating random numbers.
 
+Math class has couple methods to safety work with big numbers:
+[source,java]
+----
+System.out.println(Integer.MAX_VALUE + 2);                       // Results in overflow: -2147483647
+System.out.println(Math.addExact(Integer.MAX_VALUE, 2));         // Throws ArithmeticException due to overflow
+System.out.println(Math.addExact(500_000, 2_000));               // 502000, within int range, no overflow
+
+System.out.println(Math.abs(Integer.MIN_VALUE));                // -2147483648
+System.out.println(Math.absExact(Integer.MIN_VALUE));           // Throws ArithmeticException due to overflow
+
+
+System.out.println(Math.toIntExact(Long.MAX_VALUE));         // Throws ArithmeticException due to overflow
+System.out.println(Math.floorMod(Integer.MIN_VALUE, -1));   // Throws ArithmeticException due to overflow
+----
 ==== Manipulate text, including text blocks, using String and StringBuilder classes
 
 ==== String and StringBuilder classes
