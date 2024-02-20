@@ -326,6 +326,23 @@ Math class has couple methods to safety work with big numbers:
 
 A *BigDecimal* is depicted as an arbitrary-precision unscaled integer combined with a 32-bit integer scale. For unscaled values that are non-negative, the scale denotes the count of digits positioned to the right of the decimal point. In the case of negative unscaled values, the represented number is equal to the unscaled value multiplied by 10 to the power of negative scale. For instance, a BigDecimal of 3.14 possesses an unscaled value of 314 and a scale of 2, whereas a BigDecimal of -3.1415 holds an unscaled value of -31415 and a scale of 4.
 
+Big decimal give us possiblity to calculate values more precessely:
+
+[source,java]
+----
+double d1 = 0.100;
+double d2 = 0.2;
+System.out.println(d1 + d2); // 0.30000000000000004
+
+import java.math.BigDecimal;
+
+BigDecimal b1 = new BigDecimal("0.100");
+BigDecimal b2 = new BigDecimal("0.2");
+System.out.println(b1.add(b2)); //0.300
+
+----
+
+
 [source,java]
 ----
 System.out.println(Integer.MAX_VALUE + 2);                       // Results in overflow: -2147483647
