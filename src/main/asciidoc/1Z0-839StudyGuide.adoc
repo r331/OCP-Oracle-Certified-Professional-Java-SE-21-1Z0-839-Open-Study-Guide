@@ -777,6 +777,49 @@ Classifying Nested Classes:
 *Inner Classes*: This category encompasses non-static member classes, local classes, or anonymous classes.
 *Static Local Types*: This refers to interfaces, enum types, or record classes that are declared within a static context.
 
+[source,java]
+----
+// Defining a top-level class
+public class Main {
+
+  // Nested static member class.
+  public static class StaticMemberClass {}
+
+  // Nested static member interface.
+  public interface StaticMemberInterface {}
+
+  // Nested static member enumeration.
+  public enum StaticMemberEnum {}
+
+  // Nested static member record.
+  public record StaticMemberRecord() {}
+
+  // Nested non-static (inner) member class.
+  public class NonStaticMemberClass {}
+
+  // Method defining local types.
+  public void nonStaticMethod() {
+    // Local class inside a non-static method.
+    class LocalClass {}
+
+    // Static local interface inside a non-static method.
+    interface StaticLocalInterface {}
+
+    // Static local enumeration inside a non-static method.
+    enum StaticLocalEnum {}
+
+    // Static local record inside a non-static method.
+    record StaticLocalRecord() {}
+  }
+
+  // Field initialization with an anonymous class derived from StaticMemberClass.
+  private StaticMemberClass nonStaticField = new StaticMemberClass() {};
+
+  // Static field initialization with an anonymous class derived from StaticMemberInterface.
+  private static StaticMemberInterface staticField = new StaticMemberInterface() {};
+}
+----
+
 ==== Create classes and records, and define and use instance and static fields and methods, constructors, and instance and static initializers
 
 ==== Create classes and records
