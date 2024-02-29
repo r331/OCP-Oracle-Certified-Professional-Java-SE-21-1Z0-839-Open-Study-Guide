@@ -820,6 +820,9 @@ public class Main {
 }
 ----
 
+Static member types, such as classes, enums, record classes, or interfaces, can be defined at the top level or within other nested types. Essentially, a static member type functions similarly to a top-level type. Whether it's a class, enum, record class, or interface, a static member type supports the same kinds of declarations as its top-level counterparts. When declaring a static member class, the keyword 'static' is used, except in interfaces where it's understood to be static without explicitly stating so. For static member enums, record classes, and interfaces, they're inherently static, thus the 'static' keyword is not required.
+
+
 ==== Create classes and records, and define and use instance and static fields and methods, constructors, and instance and static initializers
 
 ==== Create classes and records
