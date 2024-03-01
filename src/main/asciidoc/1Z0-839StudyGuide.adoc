@@ -822,6 +822,45 @@ public class Main {
 
 Static member types, such as classes, enums, record classes, or interfaces, can be defined at the top level or within other nested types. Essentially, a static member type functions similarly to a top-level type. Whether it's a class, enum, record class, or interface, a static member type supports the same kinds of declarations as its top-level counterparts. When declaring a static member class, the keyword 'static' is used, except in interfaces where it's understood to be static without explicitly stating so. For static member enums, record classes, and interfaces, they're inherently static, thus the 'static' keyword is not required.
 
+[source,java]
+----
+public class Example {
+
+  // Defines a static member class
+  public static class Manager {
+
+    // Static member interface within Manager
+    private interface Developer { }
+
+    // Static member class implementing the SkilledDeveloper interface
+    public static class FrontendDeveloper implements SkilledDeveloper {
+
+      // Static method within FrontendDeveloper
+      public static void displaySimpleName() {
+        System.out.println(FrontendDeveloper.class.getSimpleName());
+      }
+
+      // Instance method within FrontendDeveloper
+      public void showName() {
+        System.out.println(this.getClass().getName());
+      }
+    } // End of FrontendDeveloper class
+  } // End of Manager class
+
+  // Static member interface extending Developer from Manager
+  interface SkilledDeveloper extends Manager.Developer {
+
+    // Public and static by default within an interface
+    class FullStackDeveloper { }
+  } // End of SkilledDeveloper interface
+
+  // Non-static member class within Example
+  public class MLDev {
+    // Static member class within MLDev
+    private static class DataScientist { }
+  }
+}
+----
 
 ==== Create classes and records, and define and use instance and static fields and methods, constructors, and instance and static initializers
 
