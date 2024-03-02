@@ -862,6 +862,48 @@ public class Example {
 }
 ----
 
+Let's see how we can init our classes:
+
+[source,java]
+----
+public class OuterClass {
+    private int outerValue = 100;
+
+    public class InnerClass {
+        private int innerValue;
+
+        public InnerClass(int innerValue) {
+            this.innerValue = innerValue;
+        }
+
+        public void display() {
+            System.out.println("Outer Value: " + outerValue);
+            System.out.println("Inner Value: " + innerValue);
+        }
+    }
+    public static class StaticNestedClass {
+        private int value;
+
+        public StaticNestedClass(int value) {
+            this.value = value;
+        }
+
+        public void display(OuterClass outerClass) {
+            System.out.println("Value: " + value);
+            System.out.println("Outer value: " + outerClass.outerValue);
+        }
+    }
+    public static void main(String[] args) {
+        OuterClass outerObject = new OuterClass();
+        OuterClass.InnerClass innerObject = outerObject.new InnerClass(11);
+        innerObject.display();
+
+        OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass(22);
+        nestedObject.display(outerObject);
+    }
+}
+----
+
 ==== Create classes and records, and define and use instance and static fields and methods, constructors, and instance and static initializers
 
 ==== Create classes and records
