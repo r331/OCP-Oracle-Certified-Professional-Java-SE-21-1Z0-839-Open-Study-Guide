@@ -897,9 +897,13 @@ public class OuterClass {
         OuterClass outerObject = new OuterClass();
         OuterClass.InnerClass innerObject = outerObject.new InnerClass(11);
         innerObject.display();
+        //Outer Value: 100
+        //Inner Value: 11
 
         OuterClass.StaticNestedClass nestedObject = new OuterClass.StaticNestedClass(22);
         nestedObject.display(outerObject);
+        //Value: 22
+        //Outer value: 100
     }
 }
 ----
