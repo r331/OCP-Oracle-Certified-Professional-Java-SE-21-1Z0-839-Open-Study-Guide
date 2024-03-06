@@ -908,7 +908,11 @@ public class OuterClass {
 }
 ----
 
+Anonymous classes in Java are a type of inner class without a name and are used to instantiate objects with certain "extras" such as methods and fields that are used for immediate needs.
+
 ==== Create classes and records, and define and use instance and static fields and methods, constructors, and instance and static initializers
+
+Java allows the overloading of constructors, enabling a class to have more than one constructor, each with a different parameter list.
 
 ==== Create classes and records
 
