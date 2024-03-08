@@ -916,6 +916,10 @@ Java allows the overloading of constructors, enabling a class to have more than 
 
 If a class doesn't explicitly define any constructors, Java automatically provides a default constructor with no parameters. However, if you define any constructor explicitly, Java does not provide the default constructor.
 
+Final fields must be initialized by the time the constructor completes.
+
+Unlike methods, constructors are not inherited.
+
 ==== Create classes and records
 
 ===== Records
