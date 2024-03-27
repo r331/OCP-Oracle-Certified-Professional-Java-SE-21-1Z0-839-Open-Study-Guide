@@ -1096,6 +1096,24 @@ But in this situation, we need explicitly declare all permits.
 
 ==== Instanceof operator and pattern matching
 
+===== Instanceof operator
+The instanceof operator in Java is used to check whether an object is an instance of a specific class or an instance of a subclass of that class.
+
+[source,java]
+----
+Object obj = "Hello World";
+
+if (obj instanceof String s) {
+    // s is automatically cast to String here
+    System.out.println(s.toUpperCase()); // No need for an explicit cast
+}
+if (obj instanceof CharSequence s) {
+    // work with inheritance
+    System.out.println(s); // will print Hello World
+}
+----
+
+
 ===== Pattern matching
 
 Problem: using instanceof operator has excess casting
