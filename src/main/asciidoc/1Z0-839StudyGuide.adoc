@@ -1084,6 +1084,251 @@ final class Bird implements Animal {}
 
 But in this situation, we need explicitly declare all permits.
 
+==== Garbage collection
+dea: Give the programmer a language tool to manage memory instead of himself.
+
+
+Solution: Provide a garbage collector system.
+
+
+In such languages as C, we need to store information about our entities in our memory and write a lot of boilerplate code to free the memory.
+
+
+Nobody is perfect. So memory leaks are frequent guests in such programs. Java solves this problem with GC, but you must know which CG will help you better.
+
+
+Your program may run on weak hardware, or your program will work with a large number of objects, or your program needs to be speedy.
+
+
+You must tweak your GC to achieve the desired performance in all these situations. So let's start.
+
+How JVM Works With Memory
+The JVM divides its memory into two areas: the heap, which stores the application data, and the non-heap, which stores the program code and other data.
+
+
+Let us focus our attention on the heap area. Because precisely in this location, our program creates new objects.
+
+
+(Note: we also can create some records in the non-heap areas. For example, if our program creates new classes on the fly)
+
+
+All garbage collectors are based on one crucial observation - many programs use short-lived objects. These objects have been created, have fulfilled their function, and are no longer needed. They prevail. Some objects live much longer, perhaps even the entire lifetime of the program.
+
+
+This is where the idea of dividing objects into the young and old generations comes in. We need very often to check the young generation.
+
+
+So in accordance with this division, the garbage collection processes are divided into minor GC, which affects only the younger generation, and full GC, which can affect both generations.
+
+
+CG is a program. And at first, it needs time and your computer resources to function. And it also affects our application.
+
+
+How?
+
+
+To perform garbage collection, the JVM pauses our application. So, this is called Stop-The-World (STW) pause.
+
+
+All application threads are paused at this time. The application inside does not suspect this at all. For the application, time runs evenly.
+
+
+Why is it so bad? Just imagine you are writing some application for exchange or an application for the plane’s autopilot. Your application could “sleep” for one second, but the context for your problem could change dramatically.
+
+
+So, this pause is a significant parameter for every GC.
+
+
+The following fundamental CG property - is the total time spent in garbage collection relative to the total program execution time. What does it mean, and why is this so important?
+
+
+Instead of one big “stop the world” phase, we can find an algorithm with many small pauses.
+
+
+Small pauses are preferable, but nothing is free. In this case, we pay for the total execution time of the program. And we also have to take this into account.
+
+
+The following parameter - is the number of hardware resources. Each CG needs memory to store information about objects and the CPU to perform cleaning.
+
+
+The last one - Promptness. Promptness in garbage collection refers to how quickly and efficiently a garbage collector (GC) reclaims the memory that is no longer being used by a program.
+
+
+It is the art of designing an algorithm that can free up memory as fast as possible while consuming minimal resources;
+
+
+Let's take a look at the garbage collectors available to us.
+
+
+You need to know the first five for the interview. The other two are much more difficult.
+
+Serial GC
+The Serial GC is a garbage collector in the Java Virtual Machine that has been in use since the early days of Java. It is helpful for programs with tiny heaps and running on less powerful machines.
+
+
+The garbage collector divides the heap into regions, including the Eden region, where newly created objects are placed. As the heap fills up, objects move between the Eden and Survivor regions.
+
+
+The JVM constantly monitors how objects move between Survivor regions and choose an appropriate threshold for the number of such moves, after which the objects move to the older generation (Tenured) region.
+
+
+When there is not enough room in the Tenured region, full garbage collection comes into play, working with objects from both generations.
+
+
+The main advantage of this garbage collector is its low overhead, and it needs super low CPU resources to perform collection.
+
+
+The main disadvantage is its long pauses during garbage collection, particularly for larger volumes of data.
+
+Parallel CG
+Parallel CG is similar to the sequential builder but includes parallel processing for some tasks and the ability to adjust performance settings automatically.
+
+
+The Parallel GC is a garbage collector in Java Virtual Machine that builds on the ideas behind the Serial GC but adds parallelism and intelligence. If the computer has more than one processor core, the old JVM automatically chooses Parallel GC (valid for old JSMs).
+
+
+The heap is divided into the same regions as Serial GC - Eden, Survivor 0, Survivor 1, and Old Gen (Tenured). However, multiple threads are involved in garbage collection in parallel, and the collector can adjust to the required performance parameters.
+
+
+Each collector thread has a memory area to clean. The Parallel GC also has settings geared towards achieving the garbage collection efficiency required, and the collector uses statistics from previous garbage collections to adjust performance parameters for future collections.
+
+
+The Parallel GC provides automatic tuning to desired performance parameters and less pause time for build time, and certain memory fragmentation is a minor drawback. It is suitable for most applications, and there are no hidden overheads.
+
+
+However, for more sophisticated applications, advanced garbage collector implementations are needed.
+
+
+Pros: In many cases faster than serial. Has good throughput.
+
+
+Cons: Consumes more resources, and pauses can be very long because we can adjust the maximum stop the world pause.
+
+Concurrent Mark Sweep
+Concurrent Mark Sweep (CMS) aims to decrease maximum latency by performing some garbage collection tasks concurrently with the application threads and is suitable for managing large amounts of data in memory.
+
+
+The Concurrent Mark Sweep (CMS) builder is an alternative to Parallel GC in the Java Virtual Machine (JVM), designed for applications that require access to multiple CPU cores and are sensitive to Stop-The-World pauses.
+
+
+The CMS builder performs the Mark and Sweep garbage collection steps in parallel with the main program, allowing it to run while it is still running.
+
+
+It uses the same memory organization as Serial and Parallel GC but does not wait for the Tenured region to fill up before starting the old-gen collection.
+
+
+Instead, it runs in the background and tries to keep the Tenured region compact.
+
+
+The CMS builder starts with the initial marking phase, which briefly stops the main threads of the application and marks all objects directly accessible from the roots.
+
+
+The main application threads then resume work, and CMS starts searching for all live objects accessible via the links from the marked root objects.
+
+
+After marking all live objects, the collector cleans the memory from the dead objects in several parallel threads.
+
+
+One of the advantages of CMS is its focus on minimizing downtime, which is critical for many applications. However, this requires sacrificing CPU resources and often total bandwidth.
+
+
+Additionally, the CMS does not compact objects in the older generation, leading to fragmentation. Long pauses for potential concurrent mode failures can be an unpleasant surprise, although they are not frequent, and CMS manages to avoid them with enough memory.
+
+
+Pros: Fast. Has small STW pauses.
+
+
+Cons: it consumes more memory, some pauses could be long, don’t like when the app creates a lot of objects.
+
+Garbage-First
+Garbage-First (G1) is intended to replace CMS, particularly for server applications running multiprocessor servers and managing large data sets.
+
+
+The G1 garbage collector organizes memory into multiple regions of equal size except for huge regions, which are created by merging regular regions to accommodate massive objects. The regions do not have to be organized in a row and may change their generation's belonging.
+
+
+Small collections are performed periodically to clean up the younger generation and move objects to Survivor regions or upgrade them to the older generation with a transfer to Tenured.
+
+
+Cleanup is performed only on the part of the regions to avoid exceeding the desired time, and it chooses to clean those regions with the most garbage ( CG tries to predict such areas).
+
+
+Complete collections use a marking cycle that runs parallel with the main application to list live objects. After the marking cycle, G1 switches to running mixed collections, which add older generation regions to the set of younger generation regions to be cleaned.
+
+
+The number of such assemblies is chosen based on statistics about previous assemblies to stay within the required build time.
+
+
+The G1 garbage collector is considered more accurate than the CMS collector in predicting pause sizes and is better at distributing garbage collections over time to prevent lengthy application stoppages, particularly with large heap sizes.
+
+
+It also does not fragment memory like the CMS collector.
+
+
+However, the G1 collector requires more CPU resources to work parallel with the main program, reducing application throughput.
+
+
+Pros: works better than CMS. Has shorter pauses.
+
+
+Cons: consumes more CPU. It Consumes more memory in case we have a lot of quite big objects(more than 500kb) because it places such objects into one region (1-32 MB)
+
+Epsilon GC
+Epsilon GC is designed for situations where no garbage collection is necessary.
+
+
+The Epsilon GC does not perform garbage collection. It uses TLABs(thread-local allocation buffers) to allocate new objects - small memory buffers requested by individual threads from the heap. Humongous objects that do not fit in the buffer request memory blocks specifically for them.
+
+
+When Epsilon GC exhausts resources, an OutOfMemoryError is generated, and the process terminates.
+
+
+Epsilon GC's benefits include less overhead costs and faster memory allocation for applications that create all the objects they need at startup or run short-lived applications that don't use all the memory allocated.
+
+
+Epsilon GC can also help analyze the overhead that other garbage collectors bring to your application.
+
+
+Pros: Super fast.
+
+
+Cons: Doesn’t collect objects :)
+
+
+The following two collectors are the most advanced of their kind and also the most complex. So we consider them briefly.
+
+ZGC
+ZGC aims to maintain pauses at a sub-millisecond level, even when managing huge amounts of data.
+
+
+ZGC is a garbage collector developed by Oracle for Java that is designed to provide high throughput and low latency while handling large heaps (up to 16TB).
+
+
+ZGC is based on the principles of virtual memory and uses pointer coloring to track the state of objects during garbage collection.
+
+
+Pros: Sub-millisecond pauses, even on large heaps, benefit applications requiring short query processing times. It works with very big heaps with good throughput. ZGC can compact the heap memory during garbage collection
+
+
+Cons: High CPU usage and initial overhead because ZGC has a relatively high initial overhead, which can slow down the startup time of applications.
+
+Shenandoah GC
+Shenandoah GC is another garbage collector aiming for short pauses regardless of the heap size.
+
+
+Shenandoah GC is a low-pause-time garbage collector developed by Red Hat. It is designed to minimize an application's time to stop its execution during garbage collection.
+
+
+Like ZGC, it is a concurrent collector, which means it operates while the application is still running, minimizing pauses.
+
+
+Shenandoah GC uses "forwarding pointers" to move objects during garbage collection. And a technique called "load-barrier elimination" to improve performance.
+
+
+Pros: pause times. Shenandoah GC can achieve short pause times, often under 10ms, even for massive heaps. Promising throughput.
+
+
+Cons: high CPU usage and complexity - it has unexpected approaches to working under heavy loads.
 ==== Implement overloading, including var-arg methods
 
 ==== Understand variable scopes, use local variable type inference, apply encapsulation, and make objects immutable
