@@ -1085,10 +1085,10 @@ final class Bird implements Animal {}
 But in this situation, we need explicitly declare all permits.
 
 ==== Garbage collection
-dea: Give the programmer a language tool to manage memory instead of himself.
+*Idea:* Give the programmer a language tool to manage memory instead of himself.
 
 
-Solution: Provide a garbage collector system.
+*Solution:* Provide a garbage collector system.
 
 
 In such languages as C, we need to store information about our entities in our memory and write a lot of boilerplate code to free the memory.
@@ -1102,13 +1102,10 @@ Your program may run on weak hardware, or your program will work with a large nu
 
 You must tweak your GC to achieve the desired performance in all these situations. So let's start.
 
-How JVM Works With Memory
+*How JVM Works With Memory*
+
 The JVM divides its memory into two areas: the heap, which stores the application data, and the non-heap, which stores the program code and other data.
-
-
 Let us focus our attention on the heap area. Because precisely in this location, our program creates new objects.
-
-
 (Note: we also can create some records in the non-heap areas. For example, if our program creates new classes on the fly)
 
 
@@ -1162,7 +1159,8 @@ Let's take a look at the garbage collectors available to us.
 
 You need to know the first five for the interview. The other two are much more difficult.
 
-Serial GC
+*Serial GC*
+
 The Serial GC is a garbage collector in the Java Virtual Machine that has been in use since the early days of Java. It is helpful for programs with tiny heaps and running on less powerful machines.
 
 
@@ -1180,7 +1178,8 @@ The main advantage of this garbage collector is its low overhead, and it needs s
 
 The main disadvantage is its long pauses during garbage collection, particularly for larger volumes of data.
 
-Parallel CG
+*Parallel CG*
+
 Parallel CG is similar to the sequential builder but includes parallel processing for some tasks and the ability to adjust performance settings automatically.
 
 
@@ -1204,7 +1203,8 @@ Pros: In many cases faster than serial. Has good throughput.
 
 Cons: Consumes more resources, and pauses can be very long because we can adjust the maximum stop the world pause.
 
-Concurrent Mark Sweep
+*Concurrent Mark Sweep*
+
 Concurrent Mark Sweep (CMS) aims to decrease maximum latency by performing some garbage collection tasks concurrently with the application threads and is suitable for managing large amounts of data in memory.
 
 
@@ -1240,7 +1240,8 @@ Pros: Fast. Has small STW pauses.
 
 Cons: it consumes more memory, some pauses could be long, don’t like when the app creates a lot of objects.
 
-Garbage-First
+*Garbage-First*
+
 Garbage-First (G1) is intended to replace CMS, particularly for server applications running multiprocessor servers and managing large data sets.
 
 
@@ -1273,7 +1274,8 @@ Pros: works better than CMS. Has shorter pauses.
 
 Cons: consumes more CPU. It Consumes more memory in case we have a lot of quite big objects(more than 500kb) because it places such objects into one region (1-32 MB)
 
-Epsilon GC
+*Epsilon GC*
+
 Epsilon GC is designed for situations where no garbage collection is necessary.
 
 
@@ -1297,7 +1299,8 @@ Cons: Doesn’t collect objects :)
 
 The following two collectors are the most advanced of their kind and also the most complex. So we consider them briefly.
 
-ZGC
+*ZGC*
+
 ZGC aims to maintain pauses at a sub-millisecond level, even when managing huge amounts of data.
 
 
@@ -1312,7 +1315,8 @@ Pros: Sub-millisecond pauses, even on large heaps, benefit applications requirin
 
 Cons: High CPU usage and initial overhead because ZGC has a relatively high initial overhead, which can slow down the startup time of applications.
 
-Shenandoah GC
+*Shenandoah GC*
+
 Shenandoah GC is another garbage collector aiming for short pauses regardless of the heap size.
 
 
