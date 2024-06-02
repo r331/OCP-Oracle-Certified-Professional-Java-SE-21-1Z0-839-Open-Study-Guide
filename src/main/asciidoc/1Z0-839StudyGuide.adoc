@@ -1447,8 +1447,36 @@ static void test(Point point) {
 They also accommodate generic record type outputs:
 
 === Handling Exceptions
+*Problem*: Nobody can write code without errors. To build robust programs, we need to handle these problems.
+
+*Solution*: To increase program stability, Java has two types of exceptions - runtime and checked - and several methods to handle them.
+
+In Java, a new class of exceptions called “checked exceptions” was introduced. These are exceptions for which the software developer must write code to handle.
+
+As we know, everything in Java is an object, and exception classes are no exception. This allows you to create new exceptions based on existing ones through inheritance.
+
+Let’s take a closer look at the exception class hierarchy. The base class for all types of exceptions is Throwable. Two classes, Error and Exception, inherit from it.
+
+Exceptions described by the Error type are exceptions that, according to the Java specification, should not be handled by the programmer because they are related to problems at the JVM level. These exceptions occur, for example, if the JVM does not find a necessary class in the classpath during the application’s start or if the memory available to the virtual machine runs out.
+
+Exceptions of the Exception type, unlike Error, are designed to be handled by application tools. It is worth mentioning here that the Exception base class refers to checked exceptions.
+
+What is it?
+
+To increase the reliability of applications, the language creators devised a solution: explicitly highlight situations that can potentially and with high probability cause an error. This approach aims to enhance the fault tolerance of applications.
+
+What situations require explicit intervention?
+
+For example, consider data transfer over a network. There’s a high probability that a user may not have a connection. Therefore, you must handle this situation to prevent unexpected program termination.
+
+try/catch/finally: Used for handling exceptions with optional cleanup code in the finally block.
+•	try-with-resources: Used for handling resources that need to be closed automatically.
+•	Multi-catch blocks: Used for catching multiple types of exceptions in a single catch block.
+•	Custom Exceptions: Create specific exception classes to represent different error conditions in your application.
 
 ==== Handle exceptions using try/catch/finally, try-with-resources, and multi-catch blocks, including custom exceptions
+
+
 
 === Working with Arrays and Collections
 
