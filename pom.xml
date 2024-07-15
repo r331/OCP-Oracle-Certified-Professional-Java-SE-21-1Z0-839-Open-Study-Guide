@@ -3,11 +3,11 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <groupId>dev.ivanov</groupId>
-    <artifactId>OCP-Oracle-Certified-Professional-Java-SE-17-1Z0-839-Open-Study-Guide</artifactId>
+    <artifactId>OCP-Oracle-Certified-Professional-Java-SE-17-1Z0-829-Open-Study-Guide</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
 
-    <name>OCP-Oracle-Certified-Professional-Java-SE-17-1Z0-839-Open-Study-Guide</name>
+    <name>OCP-Oracle-Certified-Professional-Java-SE-17-1Z0-829-Open-Study-Guide</name>
     <description>Open source book</description>
 
     <properties>
@@ -53,7 +53,7 @@
                             <goal>process-asciidoc</goal>
                         </goals>
                         <configuration>
-                            <sourceDocumentName>1Z0-839StudyGuide.adoc</sourceDocumentName>
+                            <sourceDocumentName>1Z0-829StudyGuide.adoc</sourceDocumentName>
                             <outputFile>index.html</outputFile>
                         </configuration>
                     </execution>
